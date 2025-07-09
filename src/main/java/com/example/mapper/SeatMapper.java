@@ -20,4 +20,6 @@ public interface SeatMapper extends BaseMapper<SeatEntity> {
     @Update("update tb_seat set status = 0 where id = #{id} and status=0")
     Integer unsellSeat(Integer trainid);
 
+    @Update("update tb_seat set status = 0 where id = #{id} and status=0")
+    Integer opps(Integer id);
 }

@@ -81,4 +81,11 @@ public class SeatServiceImpl {
     public void testRedis(){
         redisTemplate.opsForValue().set("canal_test_redis", "hello world");
     }
+
+    public boolean opps(Integer id) {
+        // 模拟sql回滚:把某个seat的status改为0,造成redis缓存不一致的情况
+        Integer count = seatMapper.opps(id);
+        //todo 后续验证是否触发流程：canal监听binlog,发送消息给mq，mq消费消息，回滚redis缓存余量
+        return count ==1;
+    }
 }

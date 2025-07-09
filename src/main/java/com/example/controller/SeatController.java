@@ -49,4 +49,13 @@ public class SeatController {
     public boolean unsell(Integer id) {
         return seatService.unsell(id);
     }
+
+    /**
+     * 模拟意外事务执行失败导致sql回滚了
+     * 入参：seat的id
+     */
+    @RequestMapping("/opps")
+    public boolean opps(Integer id) {
+        return seatService.opps(id);
+    }
 }
