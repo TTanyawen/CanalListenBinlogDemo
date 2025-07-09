@@ -28,4 +28,25 @@ public class SeatController {
     public int count(Integer trainid) {
         return seatService.getSeatCountByTrainid(trainid);
     }
+
+    /**
+     * 购买某个列车的车票
+     * @param trainid
+     * @return
+     */
+    @RequestMapping("/sell")
+    public boolean sell(Integer trainid) {
+        return seatService.sellSeat(trainid);
+    }
+
+    /**
+     * 退票
+     * 入参：座位id
+     * @param id
+     * @return
+     */
+    @RequestMapping("/unsell")
+    public boolean unsell(Integer id) {
+        return seatService.unsell(id);
+    }
 }

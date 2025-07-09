@@ -50,12 +50,31 @@ public class SeatServiceImpl {
     }
 
     /**
-     * 尝试买票
+     * 尝试某个列车的票
      */
-    public boolean sellSeat(Integer id){
+    public boolean sellSeat(Integer trainid){
         //todo 并发锁
-        int count = seatMapper.sellSeat(id);
+        Integer count = seatMapper.sellSeat(trainid);
+        if(count==1){
+            //删除缓存
+            redisTemplate.delete("seatcount_trainid_" + trainid);
+        }
         return count == 1;
+    }
+
+    /**
+     * 回滚座位状态
+     */
+    public boolean unsell(Integer id){
+        //todo 并发锁
+        Integer count = seatMapper.unsellSeat(id);
+        if(count==1){
+            // 删除缓存
+            int trainid=seatMapper.selectById(id).getTrainid();
+            redisTemplate.delete("seatcount_trainid_" + trainid);
+            return true;
+        }
+        return false;
     }
 
 
