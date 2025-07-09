@@ -5,8 +5,16 @@ server:
 
 
 spring:
+  # mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///db_canal_test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     username: root
     password: 2640
+# redis
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
